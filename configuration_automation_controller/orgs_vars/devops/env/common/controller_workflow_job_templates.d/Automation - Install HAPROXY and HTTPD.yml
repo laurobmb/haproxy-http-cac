@@ -31,15 +31,42 @@ controller_workflows:
           credentials: []
           success_nodes:
             - identifier: Haproxy - main-haproxy
+            - identifier: Haproxy - Generate Certificate
 
       - identifier: Haproxy - main-haproxy
+        all_parents_must_converge: false
+        related:
+          success_nodes:
+            # - identifier: Haproxy - main-http
+            - identifier: Haproxy - Check Certificate
+          failure_nodes: []
+        unified_job_template:
+          name: Haproxy - main-haproxy
+          organization:
+            name: "{{ orgs }}"
+          type: job_template
+
+      - identifier: Haproxy - Generate Certificate
+        all_parents_must_converge: false
+        related:
+          success_nodes:
+            # - identifier: Haproxy - main-http
+            - identifier: Haproxy - Check Certificate
+          failure_nodes: []
+        unified_job_template:
+          name: Haproxy - Generate Certificate
+          organization:
+            name: "{{ orgs }}"
+          type: job_template
+
+      - identifier: Haproxy - Check Certificate
         all_parents_must_converge: false
         related:
           success_nodes:
             - identifier: Haproxy - main-http
           failure_nodes: []
         unified_job_template:
-          name: Haproxy - main-haproxy
+          name: Haproxy - Check Certificate
           organization:
             name: "{{ orgs }}"
           type: job_template
