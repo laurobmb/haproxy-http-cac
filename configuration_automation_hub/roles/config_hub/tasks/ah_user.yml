@@ -1,0 +1,16 @@
+- name: Criando users
+  infra.ah_configuration.ah_user:
+    ah_host: "{{ config_hub_automationhub_url }}"
+    ah_username: "{{ config_hub_automationhub_username }}"
+    ah_password: "{{ config_hub_automationhub_password }}"
+    validate_certs: "{{ validate_certs | default('false') }}"
+    username: "{{ item.name }}"
+    first_name: "{{ item.first_name }}"
+    last_name: "{{ item.last_name }}"
+    email: "{{ item.email }}"
+    password: "{{ item.password }}"
+    groups: "{{ item.groups }}"
+    state: "{{ item.state }}"
+    is_superuser: "{{ item.is_superuser | default('false') }}"
+  with_items: "{{ config_hub_lis_of_users }}"
+

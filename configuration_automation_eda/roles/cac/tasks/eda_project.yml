@@ -1,0 +1,36 @@
+---
+- name: COnfiguring project on EDA
+  infra.eda_configuration.project:
+    name: "{{ item.0.name }}"
+    url: "{{ item.0.url }}"
+    credential: "{{ item.1.name }}"
+    description: "{{ description_project }}"
+    state: "{{ state }}"
+    eda_host: "{{ eda_host }}"
+    eda_username: "{{ eda_username }}"
+    eda_password: "{{ eda_password }}"
+    validate_certs: "{{ validate_certs }}"
+  register: edaproject
+  with_together:
+    - "{{ configuration_automationeda_project_git }}"
+    - "{{ configuration_automationeda_credential }}"
+
+- name: Waiting for sync
+  ansible.builtin.wait_for:
+    timeout: 5
+
+- name: Sync project on EDA
+  infra.eda_configuration.project_sync:
+    name: "{{ item.0.name }}"
+    wait: true
+    interval: 5
+    timeout: 60
+    eda_host: "{{ eda_host }}"
+    eda_username: "{{ eda_username }}"
+    eda_password: "{{ eda_password }}"
+    validate_certs: "{{ validate_certs }}"
+  when: (edaproject is change )
+  ignore_errors: true
+  with_together:
+    - "{{ configuration_automationeda_project_git }}"
+

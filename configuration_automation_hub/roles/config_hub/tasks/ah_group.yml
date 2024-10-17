@@ -1,0 +1,9 @@
+- name: Criando grupos
+  infra.ah_configuration.ah_group:
+    ah_host: "{{ config_hub_automationhub_url }}"
+    ah_username: "{{ config_hub_automationhub_username }}"
+    ah_password: "{{ config_hub_automationhub_password }}"
+    validate_certs: false
+    name: "{{ item }}"
+    state: "{{ config_aap_estado }}"
+  with_items: "{{ config_hub_lis_of_groups }}"

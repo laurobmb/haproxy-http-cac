@@ -1,0 +1,10 @@
+---
+controller_credentials:
+  - name: "Haproxy - Acesso hosts"
+    description: "{{ description }}"
+    credential_type: "Machine"
+    organization: "{{ orgs }}"
+    inputs:
+      username: root
+      password: redhat
+...

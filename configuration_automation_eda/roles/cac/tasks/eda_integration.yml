@@ -1,0 +1,22 @@
+---
+- name: Create a new token using username/password
+  ansible.controller.token:
+    description: "{{ description_project }}"
+    scope: write
+    state: "{{ state }}"
+    controller_username: "{{ controller_username }}"
+    controller_password: "{{ controller_password }}"
+    controller_host: "{{ controller_host }}"
+    validate_certs: "{{ validate_certs }}"
+  register: eda_token
+
+- name: Create eda user token
+  infra.eda_configuration.user_token:
+    name: integration_token
+    description: "{{ description_project }}"
+    token: "{{ eda_token.ansible_facts.controller_token.token }}"
+    eda_host: "{{ eda_host }}"
+    eda_username: "{{ eda_username }}"
+    eda_password: "{{ eda_password }}"
+    validate_certs: "{{ validate_certs }}"
+

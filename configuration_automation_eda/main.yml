@@ -1,0 +1,32 @@
+---
+- name: Comentario de alertas no ServiceNow
+  hosts: localhost
+  gather_facts: false
+  vars:
+    description_project: "Projeto de configuracao do EDA"
+    state: present
+  vars_files:
+    - vars/main.yml
+  tasks: []
+  roles:
+    - name: Configure project
+      role: cac
+      tags: [cac]
+
+- name: Comentario de alertas no ServiceNow
+  hosts: automationedacontroller
+  gather_facts: false
+  tasks:
+    - name: Abrir porta 6000 TCP no firewall
+      loop:
+        - 6000/tcp
+        - 6010/tcp
+        - 5002/tcp
+        - 5003/tcp
+        - 5004/tcp
+      ansible.posix.firewalld:
+        port: "{{ item }}"
+        permanent: true
+        state: enabled
+        immediate: true
+        zone: public

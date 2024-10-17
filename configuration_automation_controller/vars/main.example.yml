@@ -1,0 +1,19 @@
+---
+controller_username: admin
+controller_password: 
+controller_hostname: controller01.localnet.local
+controller_validate_certs: false
+
+gitlab_consulting_user: <seu user>
+gitlab_consulting_token: 
+
+automationhub_username: <seu user>
+automationhub_password: 
+
+redhat_user: <seu user na redhat>
+redhat_pass: 
+ldap_pass: 
+
+redhat_user_dev: <seu user na redhat>
+redhat_pass_dev: 
+ldap_pass_dev: 

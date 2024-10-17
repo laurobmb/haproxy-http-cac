@@ -1,0 +1,13 @@
+---
+- name: Eda create credentials
+  ansible.builtin.import_tasks: eda_credentials.yml
+
+- name: Eda create integration
+  ansible.builtin.import_tasks: eda_integration.yml
+
+- name: Eda create project
+  ansible.builtin.import_tasks: eda_project.yml
+
+- name: Eda create rulebooks
+  ansible.builtin.import_tasks: eda_rulebook_activation.yml
+
