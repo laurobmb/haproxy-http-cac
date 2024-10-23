@@ -1,5 +1,9 @@
 # Configuration as Code
 
+## Architecture
+
+![Project Architecture](photos/architecture.png)
+
 ## Create Vars file
 
 ### Example of vaults files
