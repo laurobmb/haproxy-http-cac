@@ -3,7 +3,7 @@
 - name: Create eda rulebook activation
   infra.eda_configuration.rulebook_activation:
     description: "{{ description_project }}"
-    state: "{{ state }}"
+    state: "{{ item.state }}"
     eda_host: "{{ eda_host }}"
     eda_username: "{{ eda_username }}"
     eda_password: "{{ eda_password }}"

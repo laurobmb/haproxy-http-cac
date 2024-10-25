@@ -62,6 +62,13 @@
 
   roles:
     - {role: infra.controller_configuration.filetree_read }
+
+#    - role: infra.controller_configuration.object_diff
+#      vars:
+#        controller_configuration_object_diff_tasks:
+#          - {name: workflow_job_templates, var: controller_workflows, tags: workflow_job_templates}
+#          - {name: job_templates, var: controller_templates, tags: job_templates}
+
     - {role: infra.controller_configuration.dispatch }
 
   post_tasks:
