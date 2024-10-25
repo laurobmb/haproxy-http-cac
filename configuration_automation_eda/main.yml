@@ -24,6 +24,7 @@
         - 5002/tcp
         - 5003/tcp
         - 5004/tcp
+        - 5005/tcp
       ansible.posix.firewalld:
         port: "{{ item }}"
         permanent: true
