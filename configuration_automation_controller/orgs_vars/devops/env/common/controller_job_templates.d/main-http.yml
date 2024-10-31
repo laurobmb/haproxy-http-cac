@@ -34,6 +34,7 @@ controller_templates:
     ask_instance_groups_on_launch: false
     extra_vars:
       cluster: cluster
+      mensagem: Fui configurado pelo AAP
     job_tags: ""
     force_handlers: false
     skip_tags: ""
