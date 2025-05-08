@@ -1,4 +1,0 @@
-controller_inventories:
-  - name: haproxy_project_inventory
-    organization: "{{ orgs }}"
-    description: "{{ description }}"

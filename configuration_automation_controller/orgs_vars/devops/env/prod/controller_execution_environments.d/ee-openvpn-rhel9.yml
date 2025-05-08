@@ -1,8 +1,0 @@
----
-controller_execution_environments:
-  - name: ee-openvpn-rhel9
-    description: "{{ description }}"
-    organization: "{{ orgs }}"
-    image: quay.io/lagomes/ee-openvpn:v1
-    pull: missing
-

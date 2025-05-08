@@ -1,9 +1,0 @@
----
-config_hub_automationhub_url: https://automationhub01.localnet.local
-config_hub_automationhub_username: 
-config_hub_automationhub_password: 
-
-redhat_username: <seu user na redhat>
-redhat_password: 
-
-automationhub_token: 
