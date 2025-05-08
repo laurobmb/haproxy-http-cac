@@ -1,0 +1,39 @@
+---
+- name: Playbook to configure ansible controller post installation
+  hosts: localhost
+  connection: local
+  vars_files:
+    - platform_configs/controller_auth.yml
+    - vars/main.yml
+
+  vars:
+    project_description: Automacao CAC para projeto HAPROXY
+    project_state: present
+    project_organization: devops
+
+  pre_tasks:
+    - name: Include vars from platform_configs directory
+      ansible.builtin.include_vars:
+        dir: playbooks/
+        ignore_files: [controller_config.yml.template]
+        extensions: ["yml"]
+
+#    - name: Create Organization
+#      ansible.platform.organization:
+#        name: "{{ project_organization }}"
+#        description: "{{ project_description }}"
+#        gateway_hostname: "{{ gateway_hostname }}"
+#        gateway_username: "{{ gateway_username }}"
+#        gateway_password: "{{ gateway_password }}"
+#        gateway_validate_certs: false
+
+  roles:
+    - {role: infra.aap_configuration.gateway_organizations, when: controller_execution_environments is defined}
+    - {role: infra.aap_configuration.controller_execution_environments, when: controller_execution_environments is defined}
+    - {role: infra.aap_configuration.controller_credentials, when: controller_credentials is defined}
+    - {role: infra.aap_configuration.controller_inventories, when: controller_inventories is defined}
+    - {role: infra.aap_configuration.controller_hosts, when: controller_hosts is defined}
+    - {role: infra.aap_configuration.controller_host_groups, when: controller_groups is defined}
+    - {role: infra.aap_configuration.controller_projects, when: controller_projects is defined}
+    - {role: infra.aap_configuration.controller_job_templates, when: controller_templates is defined}
+    - {role: infra.aap_configuration.controller_workflow_job_templates, when: controller_workflows is defined}

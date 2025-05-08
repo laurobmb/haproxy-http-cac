@@ -1,0 +1,16 @@
+---
+hub_ee_registries:
+  - name: lagomes_quay_io
+    url: https://quay.io/user/lagomes/
+    username: "{{ registry_username | default(omit) }}"
+    password: "{{ registry_password | default(omit) }}"
+    state: "{{ config_aap_estado }}"
+
+  - name: redhat_io
+    state: "{{ config_aap_estado }}"
+    url: https://registry.redhat.io/ansible-automation-platform
+    username: "{{ redhat_username }}"
+    password: "{{ redhat_password }}"
+...
+
+

@@ -1,0 +1,37 @@
+---
+controller_execution_environments:
+  - name: ee-vmware-quay
+    description: "{{ project_description }}"
+    organization: "{{ project_organization }}"
+    state: "{{ project_state }}"
+    image: quay.io/lagomes/ee-vmware:v6
+    pull: missing
+
+  - name: ee-windows-rhel9
+    description: "{{ project_description }}"
+    organization: "{{ project_organization }}"
+    state: "{{ project_state }}"
+    image: quay.io/lagomes/ee-windows-rhel9:v10
+    pull: missing
+
+  - name: servicenow-rhel9
+    description: "{{ project_description }}"
+    organization: "{{ project_organization }}"
+    state: "{{ project_state }}"
+    image: quay.io/lagomes/ee-windows-rhel9:v10
+    pull: missing
+
+  - name: ee-openvpn-rhel9
+    description: "{{ project_description }}"
+    organization: "{{ project_organization }}"
+    state: "{{ project_state }}"
+    image: quay.io/lagomes/ee-openvpn:v1
+    pull: missing
+
+  - name: ee-openssl-rhel8
+    description: "{{ project_description }}"
+    organization: "{{ project_organization }}"
+    state: "{{ project_state }}"
+    image: quay.io/lagomes/ee-openssl-rhel8:v6
+    pull: missing
+

@@ -1,0 +1,10 @@
+---
+eda_projects:
+  - name: haproxy-http
+    url: https://github.com/laurobmb/haproxy-http.git
+    credential: configuration_automationeda_access_gitlab
+    state: "{{ project_state }}"
+    description: "{{ project_description }}"
+    organization: "{{ project_organization }}"
+    scm_branch: main
+    scm_type: git

@@ -1,0 +1,63 @@
+---
+# aap_configuration_async_timeout: 1000
+# aap_configuration_async_retries: 50
+# aap_configuration_loop_delay: 1000
+# aap_configuration_async_delay: 1
+
+hub_collection_repositories:
+  - name: community
+    description: "{{ project_description }}"
+    pulp_labels:
+      pipeline: approved
+    distribution:
+      name: "foobar"
+      state: "{{ project_state }}"
+    remote: community
+    wait: false
+
+  - name: rh-certified
+    description: "{{ project_description }}"
+    pulp_labels:
+      pipeline: approved
+    distribution:
+      name: foobar
+      state: "{{ project_state }}"
+    remote: rh-certified
+    wait: false
+
+  - name: validated
+    description: "{{ project_description }}"
+    pulp_labels:
+      pipeline: approved
+    distribution:
+      name: foobar
+      state: "{{ project_state }}"
+    remote: validated
+    wait: false
+
+  - name: published
+    description: "{{ project_description }}"
+    pulp_labels:
+      pipeline: approved
+    distribution:
+      name: foobar
+      state: "{{ project_state }}"
+    remote: published
+    wait: false
+
+  - name: infra
+    description: "{{ project_description }}"
+    pulp_labels:
+      pipeline: approved
+    distribution:
+      name: foobar
+      state: "{{ project_state }}"
+    remote: infra
+    wait: false
+    update: true
+    timeout: 1200
+...
+
+
+
+

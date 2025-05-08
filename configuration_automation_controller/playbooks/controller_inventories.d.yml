@@ -1,0 +1,10 @@
+controller_inventories:
+  - name: haproxy_project_inventory
+    organization: "{{ project_organization }}"
+    state: "{{ project_state }}"
+    description: "{{ project_description }}"
+
+  - name: Default Blank Localhost Only
+    organization: "{{ project_organization }}"
+    state: "{{ project_state }}"
+    description: "{{ project_description }}"

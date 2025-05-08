@@ -1,0 +1,44 @@
+---
+controller_hosts:
+  - name: haproxy.localnet.local
+    inventory: haproxy_project_inventory
+    description: "{{ project_description }}"
+    state: "{{ project_state }}"    
+    enabled: true
+    variables:
+      ansible_host: 192.168.184.14
+
+  - name: localhost
+    inventory: Default Blank Localhost Only
+    description: "{{ project_description }}"
+    state: "{{ project_state }}"    
+    enabled: true
+    variables:
+      ansible_connection: local
+      ansible_host: 127.0.0.1
+
+  - name: web1.localnet.local
+    inventory: haproxy_project_inventory
+    description: "{{ project_description }}"
+    state: "{{ project_state }}"
+    enabled: true
+    variables:
+      ansible_host: 192.168.184.12
+
+  - name: web2.localnet.local
+    inventory: haproxy_project_inventory
+    description: "{{ project_description }}"
+    state: "{{ project_state }}"
+    enabled: true
+    variables:
+      ansible_host: 192.168.184.13
+
+  - name: web3.localnet.local
+    inventory: haproxy_project_inventory
+    description: "{{ project_description }}"
+    state: "{{ project_state }}"
+    enabled: true
+    variables:
+      ansible_host: 192.168.184.15
+
+

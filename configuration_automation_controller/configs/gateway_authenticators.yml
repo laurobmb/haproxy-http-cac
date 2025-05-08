@@ -1,0 +1,39 @@
+---
+gateway_authenticators:
+- name: "Deprecated Authenticator"
+  state: absent
+
+- name: Auth AzureAD
+  type: 'ansible_base.authentication.authenticator_plugins.azuread'
+  slug: authenticator-azuread
+  enabled: true
+  configuration:
+    CALLBACK_URL: 'https://127.0.0.1'
+    KEY: 'oidc-key'
+    SECRET: 'oidc-secret'
+
+- name: Auth ldap
+  type: 'ansible_base.authentication.authenticator_plugins.ldap'
+  slug: authenticator-ldap
+  enabled: true
+  configuration:
+    SERVER_URI: ["ldaps://EQTSPPRACD01.empresa.corp:636"]
+    BIND_DN: "CN=sautomator_ans,OU=empresa Energia,OU=Servicos,DC=empresa,DC=corp"
+    BIND_PASSWORD: "{{ ldap_pass }}"
+    START_TLS: "false"
+    USER_SEARCH:
+      - DC=empresa,DC=corp
+      - SCOPE_SUBTREE
+      - (sAMAccountName=%(user)s)
+    USER_ATTR_MAP:
+      email: mail
+      first_name: givenName
+      last_name: sn
+    GROUP_SEARCH:
+      - DC=empresa,DC=corp
+      - SCOPE_SUBTREE
+      - (objectClass=group)
+    GROUP_TYPE: "MemberDNGroupType"
+    GROUP_TYPE_PARAMS:
+      member_attr: member
+      name_attr: cn

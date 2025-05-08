@@ -1,0 +1,17 @@
+---
+aap_user_accounts:
+  - username: lagomes
+    first_name: Lauro
+    last_name: Gomes
+    email: lagomes@redhat.com
+    password: xxxxxxxxxxxxx
+    state: "{{ project_state }}"
+    is_superuser: true
+
+  - username: liz
+    first_name: Liz
+    last_name: Medeiros
+    password: xxxxxxxxxxxxx
+    state: "{{ project_state }}"
+    email: liz@gmail.com
+    is_superuser: false

@@ -1,0 +1,72 @@
+---
+- name: Playbook to configure ansible Controller post installation
+  hosts: localhost
+  connection: local
+
+  vars_files:
+    - platform_configs/controller_auth.yml
+    - vars/main.yml
+
+  vars:
+    aap_validate_certs: false
+    aap_configuration_secure_logging: false
+
+  collections:
+    - ansible.controller
+    - infra.aap_configuration
+
+  pre_tasks:
+    - name: Include vars from configs directory
+      ansible.builtin.include_vars:
+        dir: configs/
+        ignore_files: [controller_config.yml.template]
+        extensions: [yml]
+      tags:
+        - always
+
+    # - name: Wait for Controller to come up
+    #   ansible.builtin.uri:
+    #     url: "https://{{ aap_hostname }}/api/v2/ping/"
+    #     status_code: 200
+    #     validate_certs: "{{ aap_validate_certs }}"
+    #   register: result
+    #   until: result.status == 200
+    #   retries: 10
+    #   delay: 30
+    #   ignore_errors: true
+
+    # - name: Wait for the controller node to be up
+    #   ansible.builtin.uri:
+    #     url: "https://{{ aap_hostname }}/api/v2/mesh_visualizer/"
+    #     user: "{{ aap_username }}"
+    #     password: "{{ aap_password }}"
+    #     method: GET
+    #     validate_certs: false
+    #     force_basic_auth: true
+    #     status_code: 200
+    #     body_format: json
+    #   register: mesh_data
+    #   until: mesh_data.json is defined
+    #   retries: 80
+    #   delay: 5
+
+    # - name: "Show result of mesh_visualizer"
+    #   ansible.builtin.debug:
+    #     var: mesh_data
+
+    # - name: Sleep for 60 seconds and allow awx to come up.
+    #   ansible.builtin.wait_for:
+    #     timeout: 60
+    #   delegate_to: localhost
+
+  roles:
+    - dispatch # The dispatch role calls all of the other roles.
+
+  tasks:
+
+    - name: Add Controller Settings Individually
+      ansible.builtin.include_role:
+        name: controller_settings
+      vars:
+        controller_settings: "{{ controller_settings_individual }}"
+

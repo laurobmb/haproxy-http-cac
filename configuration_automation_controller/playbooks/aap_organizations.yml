@@ -1,0 +1,9 @@
+---
+aap_organizations:
+  - name: '{{ project_organization }}'
+    description: '{{ project_description }}'
+    state: '{{ project_state }}'
+    galaxy_credentials: 'Ansible Galaxy'
+    # instance_groups:
+    # default_environment:
+

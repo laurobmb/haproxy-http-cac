@@ -1,0 +1,99 @@
+---
+
+#project_decision_environment: Hub Default Decision Environment
+#project_decision_environment: Default Decision Environment
+project_decision_environment: de
+
+eda_rulebook_activations:
+  - name: URL_CHECK webservers
+    state: "{{ project_state }}"
+    description: "{{ project_description }}"
+    organization: "{{ project_organization }}"
+    project: haproxy-http
+    restart_policy: always
+    decision_environment: "{{ project_decision_environment }}"
+    eda_credentials:
+      - rh_aap
+    extra_vars:
+      provider: gitlab
+      EDA_AWX_API_PATH: '/api/controller/v2/'
+    enabled: true
+    awx_token: integration_token
+    rulebook: rulebook-check-webserver.yml
+
+  - name: Install HAPROXY
+    state: "{{ project_state }}"
+    description: "{{ project_description }}"
+    organization: "{{ project_organization }}"
+    project: haproxy-http
+    restart_policy: always
+    rulebook: rulebook-reinstall-haproxy.yml
+    decision_environment: "{{ project_decision_environment }}"
+    eda_credentials:
+      - rh_aap
+    extra_vars:
+      provider: gitlab
+    enabled: true
+    awx_token: integration_token
+
+  - name: Reinstall Project
+    state: absent
+    description: "{{ project_description }}"
+    organization: "{{ project_organization }}"
+    project: haproxy-http
+    restart_policy: always
+    rulebook: rulebook-reinstall-project.yml
+    decision_environment: "{{ project_decision_environment }}"
+    eda_credentials:
+      - rh_aap
+    extra_vars:
+      provider: gitlab
+    enabled: true
+    awx_token: integration_token
+
+  - name: Install WebServers
+    state: "{{ project_state }}"
+    description: "{{ project_description }}"
+    organization: "{{ project_organization }}"
+    project: haproxy-http
+    restart_policy: always
+    rulebook: rulebook-reinstall-webservers.yml
+    decision_environment: "{{ project_decision_environment }}"
+    eda_credentials:
+      - rh_aap
+    extra_vars:
+      provider: gitlab
+    enabled: true
+    awx_token: integration_token
+
+  - name: Debug
+    state: "{{ project_state }}"
+    description: "{{ project_description }}"
+    organization: "{{ project_organization }}"
+    project: haproxy-http
+    restart_policy: always
+    rulebook: rulebook-debug.yml
+    decision_environment: "{{ project_decision_environment }}"
+    eda_credentials:
+      - rh_aap
+    extra_vars:
+      provider: gitlab
+    enabled: true
+    awx_token: integration_token
+
+  - name: Rulebook geral
+    state: "{{ project_state }}"
+    description: "{{ project_description }}"
+    organization: "{{ project_organization }}"
+    project: haproxy-http
+    restart_policy: always
+    rulebook: rulebook-geral.yml
+    decision_environment: "{{ project_decision_environment }}"
+    eda_credentials:
+      - rh_aap
+    extra_vars:
+      provider: gitlab
+    enabled: true
+    awx_token: integration_token
+
+

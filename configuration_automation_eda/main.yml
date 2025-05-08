@@ -1,34 +1,30 @@
 ---
-- name: Comentario de alertas no ServiceNow
+- name: Add credential to EDA Controller
   hosts: localhost
+  connection: local
   gather_facts: false
-  vars:
-    description_project: "Projeto de configuracao do EDA"
-    state: present
+
   vars_files:
     - vars/main.yml
-  tasks: []
-  roles:
-    - name: Configure project
-      role: cac
-      tags: [cac]
+    - platform_configs/eda_auth.yml
 
-- name: Comentario de alertas no ServiceNow
-  hosts: automationedacontroller
-  gather_facts: false
-  tasks:
-    - name: Abrir porta 6000 TCP no firewall
-      loop:
-        - 6000/tcp
-        - 6010/tcp
-        - 5000/tcp
-        - 5002/tcp
-        - 5003/tcp
-        - 5004/tcp
-        - 5005/tcp
-      ansible.posix.firewalld:
-        port: "{{ item }}"
-        permanent: true
-        state: enabled
-        immediate: true
-        zone: public
+  vars:
+    project_description: Automacao CAC para projeto HAPROXY
+    project_state: present
+    project_organization: devops
+    eda_configuration_credentials_secure_logging: false
+
+  pre_tasks:
+    - name: Include vars from eda_configs directory
+      ansible.builtin.include_vars:
+        dir: playbooks/
+        extensions: ["yml"]
+      tags:
+        - always
+
+  roles:
+    - {role: infra.aap_configuration.eda_credentials, when: eda_credentials is defined}
+    - {role: infra.aap_configuration.eda_projects, when: eda_projects is defined}
+    - {role: infra.aap_configuration.eda_decision_environments, when: eda_decision_environments is defined}
+
+    - {role: infra.aap_configuration.eda_rulebook_activations, when: eda_rulebook_activations is defined}

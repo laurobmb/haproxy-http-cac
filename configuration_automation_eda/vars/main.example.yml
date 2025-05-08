@@ -1,12 +1,9 @@
 ---
-validate_certs: false
-eda_username: admin
-eda_password: 
-eda_host: https://eda.localnet.local
-
-controller_username: admin
-controller_password: 
-controller_host: controller01.localnet.local
-
-gitlab_consulting_user: <seu user do gitlab>
+aap_hostname: https://<host>
+aap_username: 
+aap_password: 
+aap_validate_certs: false
+gitlab_consulting_user: 
 gitlab_consulting_token: 
+registry_redhat_user: 
+registry_redhat_pass: 

@@ -1,0 +1,12 @@
+---
+aap_teams:
+  - name: administrators
+    state: "{{ project_state }}"
+    description: "{{ project_description }}"
+    organization: "{{ project_organization }}"
+
+  - name: operators
+    state: "{{ project_state }}"
+    description: "{{ project_description }}"
+    organization: "{{ project_organization }}"
+

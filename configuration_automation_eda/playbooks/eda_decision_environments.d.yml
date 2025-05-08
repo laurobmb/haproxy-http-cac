@@ -1,0 +1,7 @@
+---
+eda_decision_environments:
+  - name: de
+    image_url: "quay.io/lagomes/de:v1"
+    state: "{{ project_state }}"
+    description: "{{ project_description }}"
+    organization: "{{ project_organization }}"

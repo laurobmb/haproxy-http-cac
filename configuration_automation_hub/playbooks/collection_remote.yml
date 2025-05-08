@@ -1,0 +1,44 @@
+---
+hub_collection_remotes:
+  - name: rh-certified
+    url: https://console.redhat.com/api/automation-hub/content/published/
+    requirements:
+      - name: ansible.controller
+      - name: ansible.eda
+      - name: ansible.windows
+    token: "{{ automationhub_token }}"
+    auth_url: https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
+    state: "{{ project_state }}"
+
+  - name: published
+    url: https://console.redhat.com/api/automation-hub/content/published/
+    requirements:
+      - name: kentik.ansible_eda
+    token: "{{ automationhub_token }}"
+    auth_url: https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
+    state: "{{ project_state }}"
+
+  - name: validated
+    url: https://console.redhat.com/api/automation-hub/content/validated/
+    requirements:
+      - name: network.base
+    token: "{{ automationhub_token }}"
+    auth_url: https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
+    state: "{{ project_state }}"
+
+  - name: community
+    url: https://galaxy.ansible.com/
+    requirements:
+      - name: awx.awx
+      - name: community.crypto
+      - name: community.general
+      - name: community.windows
+      - name: ansible.posix
+    state: "{{ project_state }}"
+
+  - name: infra
+    url: https://galaxy.ansible.com/
+    requirements:
+      - name: laurobmb.ee_utilities
+    state: "{{ project_state }}"
+...

@@ -1,14 +1,33 @@
 ---
-- name: Configure Automation XP
+- name: Add credential to EDA Controller
   hosts: localhost
+  connection: local
   gather_facts: false
-  tasks: []
+
   vars_files:
     - vars/main.yml
+    - platform_configs/hub_auth.yml
+
   vars:
-    description_project: "cac projeto de backup"
-    config_aap_estado: present
-    validate_certs: false
+    project_description: Automacao CAC para projeto HAPROXY
+    project_state: present
+    project_organization: devops
+    eda_configuration_credentials_secure_logging: false
+
+  pre_tasks:
+    - name: Include vars from eda_configs directory
+      ansible.builtin.include_vars:
+        dir: playbooks/
+        extensions: ["yml"]
+      tags:
+        - always
 
   roles:
-    - role: config_hub
+    # - {role: infra.aap_configuration.hub_ee_registry, when: hub_ee_registries is defined}
+    # - {role: infra.aap_configuration.hub_ee_repository, when: hub_ee_repositories is defined}
+    # - {role: infra.aap_configuration.gateway_teams, when: aap_teams is defined}
+    # - {role: infra.aap_configuration.gateway_users, when: aap_user_accounts is defined}
+    # - {role: infra.aap_configuration.hub_collection_remote, when: hub_collection_remotes is defined}
+    # - {role: infra.aap_configuration.hub_collection_repository, when: hub_collection_repositories is defined}
+    # - {role: infra.aap_configuration.hub_collection_repository_sync, when: hub_collection_repositories is defined}
+    - {role: infra.aap_configuration.hub_ee_repository_sync, when: hub_ee_repositories is defined}

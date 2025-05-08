@@ -1,0 +1,55 @@
+---
+hub_ee_repositories:
+  - name: servicenow-rhel9
+    upstream_name: lagomes/servicenow-rhel9
+    registry: lagomes_quay_io
+    include_tags: v1
+    state: "{{ project_state }}"
+    description: "{{ project_description }}"
+    sync: true
+    wait: true
+    interval: 120    
+
+  - name: ee-cac-rhel9
+    upstream_name: lagomes/ee-cac-rhel9
+    registry: lagomes_quay_io
+    include_tags: v3
+    state: "{{ project_state }}"
+    description: "{{ project_description }}"
+    sync: true
+    wait: true
+    interval: 120    
+
+  - name: ee-vmware
+    upstream_name: lagomes/ee-vmware
+    registry: lagomes_quay_io
+    include_tags: v6
+    state: "{{ project_state }}"
+    description: "{{ project_description }}"
+    sync: true
+    wait: true
+    interval: 120    
+
+  - name: fac
+    upstream_name: lagomes/fac
+    registry: lagomes_quay_io
+    include_tags: v0
+    state: "{{ project_state }}"
+    description: "{{ project_description }}"
+    sync: true
+    wait: true
+    interval: 120    
+
+  - name: ansible-builder-rhel9
+    upstream_name: automation-platform/ansible-builder-rhel9
+    registry: redhat_io
+    include_tags: 3.0.1-57
+    state: "{{ project_state }}"
+    description: "{{ project_description }}"
+    sync: true
+    wait: true
+    interval: 120    
+
+...
+
+
