@@ -1,0 +1,21 @@
+---
+
+- name: Create eda rulebook activation
+  infra.eda_configuration.rulebook_activation:
+    description: "{{ description_project }}"
+    state: "{{ item.state }}"
+    eda_host: "{{ eda_host }}"
+    eda_username: "{{ eda_username }}"
+    eda_password: "{{ eda_password }}"
+    validate_certs: "{{ validate_certs }}"
+    restart_policy: always
+    name: "{{ item.name }}"
+    project: "{{ item.project }}"
+    rulebook: "{{ item.rulebook }}"
+    decision_environment: "{{ item.decision_environment }}"
+    extra_vars:
+      provider: gitlab
+    enabled: "{{ item.enabled }}"
+    awx_token: integration_token
+  loop: "{{ configuration_automationeda_project_rulebook_activation }}"
+

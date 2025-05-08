@@ -1,0 +1,84 @@
+---
+controller_workflows:
+  - name: Automation - Install HAPROXY and HTTPD
+    description: "{{ description }}"
+    organization: "{{ orgs }}"
+    extra_vars:
+      teste_var: 'xxx'
+    inventory: 'haproxy_project_inventory'
+    limit: ''
+    scm_branch: ''
+    webhook_service: ''
+    webhook_credential: ''
+    survey_enabled: false
+    allow_simultaneous: false
+    ask_limit_on_launch: True
+    ask_inventory_on_launch: True
+    ask_tags_on_launch: True
+    ask_credential_on_launch: true
+    schedules: []
+    workflow_nodes:
+
+      - identifier: Haproxy - haproxy-http
+        unified_job_template:
+          organization:
+            name: "{{ orgs }}"
+          name: Haproxy - haproxy-http
+          type: project
+        related:
+          failure_nodes: []
+          always_nodes: []
+          credentials: []
+          success_nodes:
+            - identifier: Haproxy - main-haproxy
+            - identifier: Haproxy - Generate Certificate
+
+      - identifier: Haproxy - main-haproxy
+        all_parents_must_converge: false
+        related:
+          success_nodes:
+            # - identifier: Haproxy - main-http
+            - identifier: Haproxy - Check Certificate
+          failure_nodes: []
+        unified_job_template:
+          name: Haproxy - main-haproxy
+          organization:
+            name: "{{ orgs }}"
+          type: job_template
+
+      - identifier: Haproxy - Generate Certificate
+        all_parents_must_converge: false
+        related:
+          success_nodes:
+            # - identifier: Haproxy - main-http
+            - identifier: Haproxy - Check Certificate
+          failure_nodes: []
+        unified_job_template:
+          name: Haproxy - Generate Certificate
+          organization:
+            name: "{{ orgs }}"
+          type: job_template
+
+      - identifier: Haproxy - Check Certificate
+        all_parents_must_converge: false
+        related:
+          success_nodes:
+            - identifier: Haproxy - main-http
+          failure_nodes: []
+        unified_job_template:
+          name: Haproxy - Check Certificate
+          organization:
+            name: "{{ orgs }}"
+          type: job_template
+
+      - identifier: Haproxy - main-http
+        all_parents_must_converge: false
+        related:
+          success_nodes: []
+          failure_nodes: []
+        unified_job_template:
+          name: Haproxy - main-http
+          organization:
+            name: "{{ orgs }}"
+          type: job_template
+

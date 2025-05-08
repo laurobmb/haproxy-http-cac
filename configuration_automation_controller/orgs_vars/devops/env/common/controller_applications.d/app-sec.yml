@@ -1,0 +1,11 @@
+---
+controller_applications:
+  - name: "app-sec"
+    description: "{{ description }}"
+    organization: "{{ orgs }}"
+    state: "present"
+    client_type: "public"
+    authorization_grant_type: "authorization-code"
+    skip_authorization: false
+    redirect_uris:
+      - http://controller01.localnet.local/api/v2/    

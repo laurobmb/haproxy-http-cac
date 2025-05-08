@@ -1,0 +1,9 @@
+---
+controller_hosts:
+  - name: web2.localnet.local
+    inventory: haproxy_project_inventory
+    description: "{{ description }}"
+    enabled: true
+    variables:
+      ansible_host: 192.168.184.13
+

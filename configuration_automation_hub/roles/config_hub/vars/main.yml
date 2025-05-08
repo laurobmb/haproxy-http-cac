@@ -1,0 +1,137 @@
+---
+
+config_hub_lis_of_groups:
+  - administrators
+  - operators
+
+config_hub_lis_of_users:
+  - name: lagomes
+    first_name: Lauro
+    last_name: Gomes
+    password: vs9mrD55NP
+    groups: ['administrators']
+    state: "{{ config_aap_estado }}"
+    is_superuser: true
+    email: laurobmb@gmail.com
+
+  - name: liz
+    first_name: Liz
+    last_name: Medeiros
+    password: vs9mrD55NP
+    groups: ['operators']
+    state: "{{ config_aap_estado }}"
+    email: liz@gmail.com
+    is_superuser: false
+
+config_hub_name_of_collection_remotes:
+  - name: rh-certified
+    url: https://cloud.redhat.com/api/automation-hub/
+    token: "{{ automationhub_token }}"
+    auth_url: https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
+    requirements:
+      - ansible.controller
+      - ansible.eda
+      - ansible.windows
+
+  - name: published
+    url: https://console.redhat.com/api/automation-hub/content/published/
+    token: "{{ automationhub_token }}"
+    auth_url: https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
+    requirements:
+      - kentik.ansible_eda
+
+  - name: validated
+    url: https://console.redhat.com/api/automation-hub/content/validated/
+    token: "{{ automationhub_token }}"
+    auth_url: https://sso.redhat.com/auth/realms/redhat-external/protocol/openid-connect/token
+#    requirements:
+#      - network.base
+#      - edge.microshift
+
+  - name: community-infra
+    url: https://galaxy.ansible.com/
+    requirements:
+      - awx.awx
+
+  - name: community
+    url: https://galaxy.ansible.com/
+    requirements:
+      - infra.eda_configuration
+      - infra.controller_configuration
+      - infra.ee_utilities
+      - infra.aap_utilities
+      - containers.podman
+      - awx.awx
+      - community.crypto
+      - community.general
+      - community.windows
+      - ansible.posix
+      - netbox.netbox
+      - servicenow.servicenow
+      - servicenow.itsm
+      - laurobmb.ee_utilities
+
+config_hub_name_of_collection_repositories:
+  - name: community
+    description: "description of community repository"
+    pulp_labels:
+      pipeline: approved
+    distribution:
+      state: present
+    remote: community
+    sync: true
+
+  - name: community-infra-repo
+    description: "description of community-infra-repo repository"
+    pulp_labels:
+      pipeline: approved
+    distribution:
+      state: "{{ config_aap_estado }}"
+    remote: community-infra
+    sync: true
+
+  - name: rh-certified
+    description: "description of rh-certified repository"
+    pulp_labels:
+      pipeline: approved
+    distribution:
+      state: "{{ config_aap_estado }}"
+    remote: rh-certified
+    sync: true
+
+  - name: validated
+    description: "description of validated repository"
+    pulp_labels:
+      pipeline: None
+    distribution:
+      state: "{{ config_aap_estado }}"
+    remote: validated
+    sync: true
+
+  - name: published
+    description: "description of published repository"
+    pulp_labels:
+      pipeline: None
+    distribution:
+      state: "{{ config_aap_estado }}"
+    remote: published
+    sync: true
+
+config_hub_name_of_execution_environments:
+  - name: lagomes_quay_io
+    state: "{{ config_aap_estado }}"
+    url: https://quay.io/user/lagomes/
+    images:
+      - { upstream_name: lagomes/servicenow-rhel9, tag: v1 }
+      - { upstream_name: lagomes/ee-cac-rhel9, tag: v3 }
+      - { upstream_name: lagomes/ee-vmware, tag: v6 }
+      - { upstream_name: lagomes/fac, tag: v0 }
+
+  - name: redhat_io
+    state: "{{ config_aap_estado }}"
+    url: https://registry.redhat.io/ansible-automation-platform
+    username: "{{ redhat_username }}"
+    password: "{{ redhat_password }}"
+    images:
+      - { upstream_name: ansible-automation-platform/ansible-builder-rhel9, tag: 3.0.1-57 }
+...

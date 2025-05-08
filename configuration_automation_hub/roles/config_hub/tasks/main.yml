@@ -1,0 +1,31 @@
+---
+#- name: Criando executions namespaces
+#  ansible.builtin.import_tasks: ah_ee_namespace.yml
+
+- name: Criando executions registry
+  ansible.builtin.import_tasks: ah_ee_registry.yml
+
+- name: Criando executions repo
+  ansible.builtin.import_tasks: ah_ee_repository.yml
+
+- name: Criando grupos
+  ansible.builtin.import_tasks: ah_group.yml
+
+- name: Criando users
+  ansible.builtin.import_tasks: ah_user.yml
+
+- name: Criando collections remotes
+  ansible.builtin.import_tasks: collection_remote.yml
+- name: Criando collections repos
+  ansible.builtin.import_tasks: collection_repository.yml
+
+- name: Sincronizando os registrys
+  ansible.builtin.import_tasks: ah_ee_registry_sync.yml
+
+- name: Sincronizando os repositorios
+  ansible.builtin.import_tasks: ah_ee_repository_sync.yml
+
+- name: Sincronizando as collections
+  ansible.builtin.import_tasks: collection_repository_sync.yml
+
+...

@@ -1,0 +1,12 @@
+---
+- name: Sincronizando os execution environment registrys
+  loop: "{{ config_hub_name_of_execution_environments }}"
+  infra.ah_configuration.ah_ee_registry_sync:
+    ah_host: "{{ config_hub_automationhub_url }}"
+    ah_username: "{{ config_hub_automationhub_username }}"
+    ah_password: "{{ config_hub_automationhub_password }}"
+    validate_certs: "{{ validate_certs | default('false') }}"
+    name: "{{ item.name }}"
+    wait: true
+    timeout: 300
+...

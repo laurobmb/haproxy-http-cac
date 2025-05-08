@@ -1,0 +1,55 @@
+---
+configuration_automationeda_credential:
+  - name: configuration_automationeda_access_gitlab
+    username: "{{ gitlab_consulting_user }}"
+    password: "{{ gitlab_consulting_token }}"
+    eda_type: "GitLab Personal Access Token"
+
+configuration_automationeda_project_git:
+  - name: haproxy-http
+    url: https://github.com/laurobmb/haproxy-http.git
+    credential: "{{ configuration_automationeda_credential.0.name }}"
+    branch: main
+
+configuration_automationeda_project_rulebook_activation:
+  - name: URL_CHECK webservers
+    rulebook: rulebook-check-webserver.yml
+    decision_environment: Automation Hub Default Decision Environment
+    enabled: true
+    state: absent
+    project: "{{ configuration_automationeda_project_git.0.name }}"
+
+  - name: Install HAPROXY
+    rulebook: rulebook-reinstall-haproxy.yml
+    decision_environment: Automation Hub Default Decision Environment
+    enabled: true
+    state: absent
+    project: "{{ configuration_automationeda_project_git.0.name }}"
+
+  - name: Reinstall Project
+    rulebook: rulebook-reinstall-project.yml
+    decision_environment: Automation Hub Default Decision Environment
+    enabled: true
+    state: absent
+    project: "{{ configuration_automationeda_project_git.0.name }}"
+
+  - name: Install WebServers
+    rulebook: rulebook-reinstall-webservers.yml
+    decision_environment: Automation Hub Default Decision Environment
+    enabled: true
+    state: absent
+    project: "{{ configuration_automationeda_project_git.0.name }}"
+
+  - name: Debug
+    rulebook: rulebook-debug.yml
+    decision_environment: Automation Hub Default Decision Environment
+    enabled: true
+    state: present
+    project: "{{ configuration_automationeda_project_git.0.name }}"
+
+  - name: Rulebook geral
+    rulebook: rulebook-geral.yml
+    decision_environment: Automation Hub Default Decision Environment
+    enabled: true
+    state: present
+    project: "{{ configuration_automationeda_project_git.0.name }}"

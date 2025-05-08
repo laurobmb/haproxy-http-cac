@@ -1,0 +1,14 @@
+---
+- name: Configure Automation XP
+  hosts: localhost
+  gather_facts: false
+  tasks: []
+  vars_files:
+    - vars/main.yml
+  vars:
+    description_project: "cac projeto de backup"
+    config_aap_estado: present
+    validate_certs: false
+
+  roles:
+    - role: config_hub

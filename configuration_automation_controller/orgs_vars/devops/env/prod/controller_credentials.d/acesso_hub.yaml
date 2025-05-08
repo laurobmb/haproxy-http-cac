@@ -1,0 +1,12 @@
+---
+controller_credentials:
+  - name: "Haproxy - Acesso HUB"
+    description: "{{ description }}"
+    credential_type: "Container Registry"
+    organization: "{{ orgs }}"
+    inputs:
+      host: automationhub01.conectado.local
+      username: "{{ automationhub_username }}"
+      password: "{{ automationhub_password }}"
+      verify_ssl: false
+...

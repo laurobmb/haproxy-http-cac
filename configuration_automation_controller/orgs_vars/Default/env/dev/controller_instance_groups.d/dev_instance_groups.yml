@@ -1,0 +1,57 @@
+---
+controller_instance_groups:
+  - name: "dc1"
+    policy_instance_minimum: "0"
+    policy_instance_percentage: "0"
+    instances:
+      - "controller01.localnet.local"
+
+  - name: "dc2"
+    policy_instance_minimum: "0"
+    policy_instance_percentage: "0"
+    instances:
+      - "controller01.localnet.local"            
+
+  - name: "dc3"
+    policy_instance_minimum: "0"
+    policy_instance_percentage: "0"
+    instances:
+      - "controller01.localnet.local"
+
+  - name: "dc4"
+    policy_instance_minimum: "0"
+    policy_instance_percentage: "0"
+    instances:
+      - "controller01.localnet.local"
+
+  - name: "dc5"
+    policy_instance_minimum: "0"
+    policy_instance_percentage: "0"
+    instances:
+      - "controller01.localnet.local"
+
+  - name: "dc6"
+    policy_instance_minimum: "0"
+    policy_instance_percentage: "0"
+    instances:
+      - "controller01.localnet.local"
+
+  - name: "dc9"
+    policy_instance_minimum: "0"
+    policy_instance_percentage: "0"
+    instances:
+      - "controller01.localnet.local"
+
+  - name: "dc8"
+    policy_instance_minimum: "0"
+    policy_instance_percentage: "0"
+    instances:
+      - "controller01.localnet.local"
+
+  - name: "dc9"
+    policy_instance_minimum: "0"
+    policy_instance_percentage: "0"
+    instances:
+      - "controller01.localnet.local"
+
+...
